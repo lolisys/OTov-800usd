@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>E-Wallet Access</title>
+    <title>E-Wallet Application</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background: #eef2f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 
-        /* Container mimicking the two screens */
-        .app-container { display: flex; gap: 40px; }
-        .screen { width: 350px; height: 650px; background: white; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; padding: 40px; }
+        /* The single app screen */
+        .screen { width: 350px; height: 650px; background: white; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; padding: 40px; transition: all 0.3s ease; }
+        .hidden { display: none; }
 
-        /* Left Screen - Blue Theme */
+        /* Welcome View */
         .screen-blue { background: #2b70c3; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .logo { font-size: 60px; margin-bottom: 20px; }
         .title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
@@ -20,45 +20,53 @@
         .btn-blue { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
         .btn-white { background: white; color: #2b70c3; border: none; }
 
-        /* Right Screen - Login Theme */
-        .screen-white { display: flex; flex-direction: column; }
+        /* Form Views */
         .logo-small { color: #2b70c3; font-size: 40px; text-align: center; margin-bottom: 40px; }
         label { font-size: 12px; color: #888; display: block; margin-bottom: 8px; }
         input { width: 100%; border: none; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 25px; font-size: 16px; outline: none; }
-        .forgot { font-size: 12px; color: #2b70c3; text-align: right; display: block; margin-top: -20px; margin-bottom: 20px; cursor: pointer; }
-        .btn-signin { width: 100%; padding: 15px; background: #2b70c3; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .register-link { text-align: center; font-size: 12px; color: #888; margin-top: auto; }
-        .register-link a { color: #2b70c3; font-weight: bold; text-decoration: none; }
+        .btn-action { width: 100%; padding: 15px; background: #2b70c3; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .nav-link { text-align: center; font-size: 12px; color: #888; margin-top: 20px; cursor: pointer; }
+        .nav-link span { color: #2b70c3; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="screen screen-blue">
+    <div id="landing-view" class="screen screen-blue">
         <div class="logo">▲</div>
         <div class="title">E-Wallet</div>
         <div class="subtitle">Manage all your cards easily in one place</div>
-        <button class="btn-blue">Register</button>
-        <button class="btn-blue btn-white">Sign in</button>
+        <button class="btn-blue" onclick="showView('register-view')">Register</button>
+        <button class="btn-blue btn-white" onclick="showView('login-view')">Sign in</button>
     </div>
 
-    <div class="screen screen-white">
+    <div id="login-view" class="screen hidden">
         <div class="logo-small">▲</div>
-        
         <label>User name</label>
-        <input type="text" value="Alena Turkina">
-        
+        <input type="text" placeholder="Enter username">
         <label>Password</label>
-        <input type="password" value="••••••••">
-        <span class="forgot">Forgot password?</span>
-        
-        <button class="btn-signin">Sign In</button>
-        
-        <div class="register-link">
-            Don't have an account? <a href="#">Register</a>
-        </div>
+        <input type="password" placeholder="••••••••">
+        <button class="btn-action">Sign In</button>
+        <div class="nav-link" onclick="showView('landing-view')">Back to <span>Home</span></div>
     </div>
-</div>
 
+    <div id="register-view" class="screen hidden">
+        <div class="logo-small">▲</div>
+        <h2 style="margin-bottom: 20px; color: #2b70c3;">Create Account</h2>
+        <label>Full Name</label>
+        <input type="text">
+        <label>Email</label>
+        <input type="email">
+        <button class="btn-action">Register</button>
+        <div class="nav-link" onclick="showView('landing-view')">Back to <span>Home</span></div>
+    </div>
+
+    <script>
+        function showView(viewId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            // Show requested screen
+            document.getElementById(viewId).classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
