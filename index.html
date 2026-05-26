@@ -30,7 +30,7 @@
             width: 100%;
         }
 
-        /* Unified Mobile Frame for Live Deployment */
+        /* Unified Mobile Frame configured for GitHub Pages Server */
         .mobile-container { 
             width: 100%; 
             max-width: 400px; 
@@ -40,6 +40,7 @@
             position: relative; 
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
         
         .hidden { display: none !important; }
@@ -84,9 +85,9 @@
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 10px; }
         .rate-table td { padding: 8px; border-bottom: 1px solid #eee; }
 
-        /* --- EMBEDDED TRANSACTION RECEIPT STYLING --- */
+        /* --- EMBEDDED RECEIPT SECTION STYLING --- */
         .receipt-section-wrapper {
-            margin: 5px 20px 25px 20px;
+            margin: 15px 20px 25px 20px;
             border: 1px solid #dcdcdc;
             border-radius: 6px;
             overflow: hidden;
@@ -106,11 +107,9 @@
         .data-group { display: flex; flex-direction: column; }
         .label { font-size: 11px; color: #7a7a7a; margin-bottom: 1px; }
         .value { font-size: 13px; font-weight: bold; color: #222222; }
-        
         .overlap-container { position: relative; height: 18px; }
         .value-base { position: absolute; left: 0; top: 0; font-size: 13px; font-weight: bold; color: #222222; }
         .value-overlap { position: absolute; left: 78px; top: 0; font-size: 13px; font-weight: bold; color: #222222; }
-        
         .amount-row { font-size: 13px; font-weight: bold; }
         .currency-usd { color: #222222; } .amount-usd { color: #428bca; } .separator { color: #222222; }
         .amount-ugx { color: #428bca; } .currency-ugx { color: #222222; }
@@ -283,7 +282,7 @@
                                     <circle cx="7" cy="7" r="1" fill="#fff"/><circle cx="13" cy="7" r="1" fill="#fff"/><circle cx="19" cy="7" r="1" fill="#fff"/><circle cx="25" cy="7" r="1" fill="#fff"/>
                                     <circle cx="4" cy="11" r="1" fill="#fff"/><circle cx="10" cy="11" r="1" fill="#fff"/><circle cx="16" cy="11" r="1" fill="#fff"/><circle cx="22" cy="11" r="1" fill="#fff"/><circle cx="26" cy="11" r="1" fill="#fff"/>
                                     <circle cx="7" cy="15" r="1" fill="#fff"/><circle cx="13" cy="15" r="1" fill="#fff"/><circle cx="19" cy="15" r="1" fill="#fff"/><circle cx="25" cy="15" r="1" fill="#fff"/>
-                                    <circle cx="4" cy="18" r="1" fill="#fff"/><circle cx="10" cy="18" r="1" fill="#fff"/><circle cx="16" cy="18" r="1" fill="#fff"/><circle cx="22" cy="18" r="1" fill="#fff"/><circle cx="26" cy="18" r="1" fill="#fff"/>
+                                    <circle cx="4" cy="18" r="1" fill="#fff"/><circle cx="10" cy="18" r="1" fill="#fff"/><circle cx="16" stroke="#fff" cy="18" r="1" fill="#fff"/><circle cx="22" cy="18" r="1" fill="#fff"/><circle cx="26" cy="18" r="1" fill="#fff"/>
                                 </svg>
                                 <span class="total-final-value">USD 950.00</span>
                             </div>
