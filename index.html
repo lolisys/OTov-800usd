@@ -21,15 +21,16 @@
             font-family: 'Segoe UI', Roboto, sans-serif; 
         }
         
-        body { 
+        body, html { 
             background-color: #1a1a1a; 
             display: flex; 
             justify-content: center; 
             align-items: flex-start;
             min-height: 100vh;
+            width: 100%;
         }
 
-        /* Unified Mobile Frame for W3Schools View */
+        /* Unified Mobile Frame for Live Deployment */
         .mobile-container { 
             width: 100%; 
             max-width: 400px; 
@@ -37,13 +38,14 @@
             min-height: 100vh; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
             position: relative; 
-            overflow-x: hidden; 
+            display: flex;
+            flex-direction: column;
         }
         
         .hidden { display: none !important; }
         
         /* --- LOGIN VIEW --- */
-        #login-view { background-color: var(--bg-soft); min-height: 100vh; }
+        #login-view { background-color: var(--bg-soft); min-height: 100vh; width: 100%; }
         .intl-header-box { font-size: 0.62rem; color: #666; text-align: right; padding: 12px; line-height: 1.3; background: white; border-bottom: 1px solid #eee; }
         .login-hero { text-align: center; padding: 30px 20px; }
         .airtel-logo-red { color: var(--airtel-red); font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
@@ -53,6 +55,7 @@
         .btn-access { width: 100%; padding: 16px; background: var(--airtel-red); color: white; border: none; border-radius: 30px; font-weight: 800; cursor: pointer; }
 
         /* --- DASHBOARD VIEW --- */
+        #dashboard-view { width: 100%; display: flex; flex-direction: column; }
         .dash-header { background: var(--selar-blue); color: white; padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
         .blink { animation: blinker 1.2s linear infinite; }
         @keyframes blinker { 50% { opacity: 0.2; } }
@@ -81,17 +84,17 @@
         .rate-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 10px; }
         .rate-table td { padding: 8px; border-bottom: 1px solid #eee; }
 
-        /* --- EMBEDDED RECEIPT SECTION STYLING --- */
+        /* --- EMBEDDED TRANSACTION RECEIPT STYLING --- */
         .receipt-section-wrapper {
-            margin: 15px 20px 25px 20px;
+            margin: 5px 20px 25px 20px;
             border: 1px solid #dcdcdc;
             border-radius: 6px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-        .top-banner { background-color: #0d233a; padding: 10px 12px; }
+        .top-banner { background-color: #0d233a; padding: 10px 12px; width: 100%; }
         .top-banner-inner { border: 1px solid #4a7a56; padding: 6px 10px; }
-        .top-banner-text { color: #5cb85c; font-weight: bold; font-size: 11px; letter-spacing: 0.5px; }
+        .top-banner-text { color: #5cb85c; font-weight: bold; font-size: 11px; letter-spacing: 0.5px; display: block; }
         .receipt-body { padding: 12px; background-color: #ffffff; display: flex; flex-direction: column; gap: 10px; }
         .receipt-header-card { background-color: #0e2e54; color: #ffffff; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
         .receipt-for { font-size: 11px; color: #a0b2c6; margin-bottom: 2px; }
@@ -103,9 +106,11 @@
         .data-group { display: flex; flex-direction: column; }
         .label { font-size: 11px; color: #7a7a7a; margin-bottom: 1px; }
         .value { font-size: 13px; font-weight: bold; color: #222222; }
+        
         .overlap-container { position: relative; height: 18px; }
         .value-base { position: absolute; left: 0; top: 0; font-size: 13px; font-weight: bold; color: #222222; }
         .value-overlap { position: absolute; left: 78px; top: 0; font-size: 13px; font-weight: bold; color: #222222; }
+        
         .amount-row { font-size: 13px; font-weight: bold; }
         .currency-usd { color: #222222; } .amount-usd { color: #428bca; } .separator { color: #222222; }
         .amount-ugx { color: #428bca; } .currency-ugx { color: #222222; }
