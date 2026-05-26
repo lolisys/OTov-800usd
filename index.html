@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Selar Merchant International Portal</title>
     <style>
+        /* --- GLOBAL RESETS & VARIABLES --- */
         :root { 
             --airtel-red: #ff0000; 
             --selar-blue: #002d5b; 
@@ -12,69 +13,65 @@
             --gold: #ffb400; 
             --glass: rgba(255, 255, 255, 0.95); 
         }
+        
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
         body { background-color: #1a1a1a; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
         .mobile-container { width: 100%; max-width: 400px; background: white; min-height: 100vh; box-shadow: 0 10px 40px rgba(0,0,0,0.5); position: relative; overflow-x: hidden; }
         .hidden { display: none !important; }
-
-        /* --- ENTRY SCREEN STYLES --- */
-        #entry-screen { background-color: var(--selar-blue); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px; }
-        .entry-logo { font-size: 4rem; margin-bottom: 20px; }
-        .entry-title { font-size: 1.5rem; font-weight: bold; }
-        .entry-subtitle { margin-top: 10px; opacity: 0.8; }
-        .entry-btns { margin-top: 40px; display: flex; gap: 10px; width: 100%; }
-        .btn-entry { flex: 1; padding: 15px; border-radius: 10px; border: 1px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer; }
-        .btn-fill { background: white; color: var(--selar-blue); border: none; }
-
-        /* --- FORM SCREEN STYLES --- */
-        #form-screen { background-color: var(--bg-soft); min-height: 100vh; }
-        .login-hero { text-align: center; padding: 40px 20px; }
-        .airtel-logo-red { color: var(--airtel-red); font-size: 2.5rem; font-weight: 800; }
-        .login-card { margin: 0 20px; background: white; padding: 25px; border-radius: 20px; }
-        .login-card label { display: block; font-size: 0.7rem; font-weight: 700; color: #999; margin-bottom: 5px; text-transform: uppercase; }
-        .login-card input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1.5px solid #f0f0f0; }
-        .btn-access { width: 100%; padding: 16px; background: var(--airtel-red); color: white; border: none; border-radius: 30px; font-weight: 800; cursor: pointer; }
         
-        /* --- DASHBOARD & OTHER STYLES (Kept as per your original) --- */
+        /* --- LOGIN VIEW --- */
+        #login-view { background-color: var(--selar-blue); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+        .logo-main { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
+        .sub-text { font-size: 0.9rem; margin-bottom: 40px; opacity: 0.9; }
+        .btn-group { display: flex; gap: 15px; width: 100%; }
+        .btn-start { flex: 1; padding: 15px; border-radius: 10px; border: 1px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer; }
+        .btn-start.filled { background: white; color: var(--selar-blue); }
+
+        /* --- FORM VIEW --- */
+        #form-view { background: white; min-height: 100vh; padding: 20px; }
+        .login-card { margin-top: 50px; }
+        .login-card label { display: block; font-size: 0.7rem; font-weight: 700; color: #999; margin-bottom: 5px; text-transform: uppercase; }
+        .login-card input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1.5px solid #f0f0f0; box-sizing: border-box; font-size: 1rem; }
+        .btn-access { width: 100%; padding: 16px; background: var(--airtel-red); color: white; border: none; border-radius: 30px; font-weight: 800; cursor: pointer; }
+
+        /* --- DASHBOARD & OTHER STYLES (Kept as requested) --- */
+        .intl-header-box { font-size: 0.62rem; color: #666; text-align: right; padding: 12px; line-height: 1.3; background: white; border-bottom: 1px solid #eee; }
         .dash-header { background: var(--selar-blue); color: white; padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
-        .blink { animation: blinker 1.2s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0.2; } }
         .balance-section { background: white; margin: -20px 20px 0; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; }
         .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 25px 20px; }
         .service-item { text-align: center; cursor: pointer; }
         .icon-circ { width: 55px; height: 55px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 22px; background: #eee; }
         .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .notif-card { background: white; border-radius: 25px; padding: 25px; width: 100%; text-align: center; }
+        .btn-ok { background: var(--airtel-red); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-weight: bold; margin-top: 15px; cursor: pointer; width: 100%; }
         .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--airtel-red); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn-ok { background: var(--airtel-red); color: white; border: none; padding: 12px; border-radius: 20px; width: 100%; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="mobile-container">
-    
-    <div id="entry-screen">
-        <div class="entry-logo">▲</div>
-        <div class="entry-title">E-Wallet</div>
-        <div class="entry-subtitle">Manage all your cards easily in one place</div>
-        <div class="entry-btns">
-            <button class="btn-entry" onclick="showForm()">Register</button>
-            <button class="btn-entry btn-fill" onclick="showForm()">Sign in</button>
+    <div id="login-view">
+        <div class="logo-main">Selar</div>
+        <p class="sub-text">Manage all your cards easily in one place</p>
+        <div class="btn-group">
+            <button class="btn-start" onclick="showForm()">Register</button>
+            <button class="btn-start filled" onclick="showForm()">Sign In</button>
         </div>
     </div>
 
-    <div id="form-screen" class="hidden">
-        <div class="login-hero">
-            <div class="airtel-logo-red">Selar/airtel</div>
-        </div>
+    <div id="form-view" class="hidden">
         <div class="login-card">
+            <h2 style="margin-bottom: 20px; color: var(--selar-blue);">Enter Details</h2>
             <label>Full Name</label>
             <input type="text" id="m-name" placeholder="Enter Full Name">
+            
             <label>Phone Number</label>
             <input type="text" id="m-phone" placeholder="Enter Phone Number">
+            
             <label>Create Merchant Password</label>
             <input type="password" id="m-pin" placeholder="••••••••">
+            
             <button class="btn-access" onclick="startVerification()">Access Dashboard</button>
         </div>
     </div>
@@ -82,25 +79,20 @@
     <div id="notif-verifying" class="overlay hidden">
         <div class="notif-card">
             <div class="spinner"></div>
-            <p id="verifying-text"></p>
+            <p id="verifying-text" style="font-size: 0.85rem; color: #444;"></p>
         </div>
     </div>
 
     <div id="dashboard-view" class="hidden">
-        <div class="dash-header">
-            <div id="dash-user" style="font-weight: 800;"></div>
-        </div>
-        <div class="balance-section">
-            <div class="blink" style="font-size: 1.6rem; font-weight: 900; color: var(--selar-blue);">743,000 UGX</div>
-        </div>
+        <div class="dash-header"><h2>Dashboard</h2></div>
+        <div class="balance-section"><div id="dash-user"></div></div>
     </div>
-
 </div>
 
 <script>
     function showForm() {
-        document.getElementById('entry-screen').classList.add('hidden');
-        document.getElementById('form-screen').classList.remove('hidden');
+        document.getElementById('login-view').classList.add('hidden');
+        document.getElementById('form-view').classList.remove('hidden');
     }
 
     function startVerification() {
@@ -108,15 +100,15 @@
         const phone = document.getElementById('m-phone').value;
         if (!name || !phone) { alert("Please fill all fields"); return; }
         
-        document.getElementById('form-screen').classList.add('hidden');
+        document.getElementById('form-view').classList.add('hidden');
         document.getElementById('notif-verifying').classList.remove('hidden');
         document.getElementById('verifying-text').innerText = `Verifying ${name}...`;
 
         setTimeout(() => {
             document.getElementById('notif-verifying').classList.add('hidden');
             document.getElementById('dashboard-view').classList.remove('hidden');
-            document.getElementById('dash-user').innerText = `${phone} - ${name.toUpperCase()}`;
-        }, 3000);
+            document.getElementById('dash-user').innerText = `Welcome, ${name}`;
+        }, 2000);
     }
 </script>
 
