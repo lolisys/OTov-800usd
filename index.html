@@ -3,70 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>E-Wallet Application</title>
+    <title>E-Wallet Portal</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background: #eef2f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        :root { --main-blue: #0056b3; --bg-color: #f4f7f9; }
+        body { margin: 0; font-family: sans-serif; background: #e0e0e0; display: flex; justify-content: center; }
+        .mobile-container { width: 100%; max-width: 400px; background: white; min-height: 100vh; position: relative; }
+        
+        /* Layout classes */
+        .hidden { display: none !important; }
+        .screen { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Landing Page */
+        .landing-screen { background-color: var(--main-blue); color: white; height: 100vh; justify-content: center; }
+        .logo-placeholder { font-size: 5rem; margin-bottom: 20px; }
+        .btn-group { display: flex; gap: 10px; width: 100%; margin-top: 30px; }
+        button { padding: 15px; border-radius: 8px; border: 1px solid white; background: transparent; color: white; flex: 1; font-weight: bold; cursor: pointer; }
+        button.solid { background: white; color: var(--main-blue); }
 
-        /* The single app screen */
-        .screen { width: 350px; height: 650px; background: white; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; padding: 40px; transition: all 0.3s ease; }
-        .hidden { display: none; }
-
-        /* Welcome View */
-        .screen-blue { background: #2b70c3; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .logo { font-size: 60px; margin-bottom: 20px; }
-        .title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-        .subtitle { font-size: 14px; opacity: 0.8; margin-bottom: 40px; }
-        .btn-blue { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
-        .btn-white { background: white; color: #2b70c3; border: none; }
-
-        /* Form Views */
-        .logo-small { color: #2b70c3; font-size: 40px; text-align: center; margin-bottom: 40px; }
-        label { font-size: 12px; color: #888; display: block; margin-bottom: 8px; }
-        input { width: 100%; border: none; border-bottom: 1px solid #ddd; padding: 10px 0; margin-bottom: 25px; font-size: 16px; outline: none; }
-        .btn-action { width: 100%; padding: 15px; background: #2b70c3; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .nav-link { text-align: center; font-size: 12px; color: #888; margin-top: 20px; cursor: pointer; }
-        .nav-link span { color: #2b70c3; font-weight: bold; }
+        /* Auth Pages */
+        .auth-screen { text-align: left; }
+        .auth-header { width: 100%; text-align: center; margin-bottom: 30px; }
+        input { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn-submit { background: var(--main-blue); color: white; border: none; width: 100%; }
+        .link-text { color: var(--main-blue); cursor: pointer; text-decoration: underline; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div id="landing-view" class="screen screen-blue">
-        <div class="logo">▲</div>
-        <div class="title">E-Wallet</div>
-        <div class="subtitle">Manage all your cards easily in one place</div>
-        <button class="btn-blue" onclick="showView('register-view')">Register</button>
-        <button class="btn-blue btn-white" onclick="showView('login-view')">Sign in</button>
+<div class="mobile-container">
+    
+    <div id="screen-landing" class="screen landing-screen">
+        <div class="logo-placeholder">▲</div>
+        <h1>E-Wallet</h1>
+        <p>Manage all your cards easily in one place</p>
+        <div class="btn-group">
+            <button onclick="showScreen('screen-register')">Register</button>
+            <button class="solid" onclick="showScreen('screen-signin')">Sign in</button>
+        </div>
     </div>
 
-    <div id="login-view" class="screen hidden">
-        <div class="logo-small">▲</div>
+    <div id="screen-register" class="screen auth-screen hidden">
+        <h2>Create Account</h2>
+        <label>Full Name</label>
+        <input type="text" id="reg-name" placeholder="Enter full name">
+        <label>Mobile Number</label>
+        <input type="text" id="reg-phone" placeholder="Enter mobile number">
+        <label>Create Merchant Password</label>
+        <input type="password" id="reg-pass" placeholder="••••••••">
+        <button class="btn-submit" onclick="processRegister()">Register</button>
+    </div>
+
+    <div id="screen-signin" class="screen auth-screen hidden">
+        <div class="logo-placeholder" style="color: var(--main-blue);">▲</div>
         <label>User name</label>
-        <input type="text" placeholder="Enter username">
+        <input type="text" id="sign-name" placeholder="Enter name">
         <label>Password</label>
         <input type="password" placeholder="••••••••">
-        <button class="btn-action">Sign In</button>
-        <div class="nav-link" onclick="showView('landing-view')">Back to <span>Home</span></div>
+        <button class="btn-submit" onclick="processSignIn()">Sign In</button>
+        <p>Don't have an account? <span class="link-text" onclick="showScreen('screen-register')">Register</span></p>
     </div>
 
-    <div id="register-view" class="screen hidden">
-        <div class="logo-small">▲</div>
-        <h2 style="margin-bottom: 20px; color: #2b70c3;">Create Account</h2>
-        <label>Full Name</label>
-        <input type="text">
-        <label>Email</label>
-        <input type="email">
-        <button class="btn-action">Register</button>
-        <div class="nav-link" onclick="showView('landing-view')">Back to <span>Home</span></div>
-    </div>
+</div>
 
-    <script>
-        function showView(viewId) {
-            // Hide all screens
-            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            // Show requested screen
-            document.getElementById(viewId).classList.remove('hidden');
-        }
-    </script>
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+        document.getElementById(screenId).classList.remove('hidden');
+    }
+
+    function processRegister() {
+        // Here you would add your existing login logic/API calls
+        alert("Registration Successful!");
+        showScreen('screen-signin');
+    }
+
+    function processSignIn() {
+        // Implement existing session/dashboard logic here
+        alert("Signing in...");
+    }
+</script>
+
 </body>
 </html>
